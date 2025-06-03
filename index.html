@@ -5,11 +5,12 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lab 9</title>
+  <title>Lab 9 - JavaScript Error Handling</title>
 
   <style>
     button {
       margin: 3px;
+      padding: 5px 8px;
     }
 
     button:hover {
@@ -32,37 +33,85 @@
 
     main {
       width: 800px;
+      font-family: Arial, sans-serif;
     }
 
     #error-btns {
-      column-gap: 5px;
       display: flex;
       flex-wrap: wrap;
-      margin-top: 30px;
-      row-gap: 5px;
+      gap: 5px;
+      margin-top: 20px;
     }
 
-    #error-btns>* {
-      padding: 8px 2px;
-      width: 122px;
+    #error-btns > button {
+      padding: 8px 12px;
+      width: 120px;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    h3 {
+      margin-top: 25px;
+      color: #666;
+    }
+
+    #error-handling-demos button {
+      margin: 5px;
+      padding: 8px 12px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 3px;
+    }
+
+    #error-handling-demos button:hover {
+      background-color: #45a049;
+    }
+
+    #demo-output {
+      border: 1px solid #ddd;
+      padding: 10px;
+      margin: 10px 0;
+      min-height: 80px;
+      background: #f9f9f9;
+      max-height: 300px;
+      overflow-y: auto;
+      font-size: 14px;
+    }
+
+    .info-box {
+      margin-top: 20px;
+      padding: 15px;
+      border: 1px solid #ccc;
+      background-color: #f5f5f5;
+      border-radius: 5px;
+    }
+
+    .info-box h3 {
+      margin-top: 0;
+      color: #555;
     }
   </style>
 </head>
 
 <body>
   <main>
+    <h1>Lab 9 - JavaScript Error Handling</h1>
+    
     <form>
       <fieldset>
-        <legend>Error Calculator</legend>
-        <input name="first-num" id="first-num" />
+        <legend>Calculator with Error Handling</legend>
+        <input name="first-num" id="first-num" placeholder="First number" />
         <select name="operator" id="operator">
           <option>+</option>
           <option>-</option>
           <option>*</option>
           <option>/</option>
         </select>
-        <input name="second-num" id="second-num" />
-        <button id="calculate">Calculate</button>
+        <input name="second-num" id="second-num" placeholder="Second number" />
+        <button type="submit" id="calculate">Calculate</button>
         <br />
         <output></output>
       </fieldset>
@@ -85,24 +134,40 @@
       <button>Console Trace</button>
       <button>Trigger a Global Error</button>
     </section>
+
+    <section id="error-handling-demos">
+      <h3>Error Handling Examples</h3>
+      <div>
+        <button id="dom-manipulation">DOM Access</button>
+        <button id="json-parsing">JSON Parsing</button>
+        <button id="localStorage-demo">LocalStorage</button>
+        <button id="custom-validation">Validation</button>
+        <button id="network-simulation">Network Errors</button>
+        <button id="property-access">Property Access</button>
+        <button id="custom-errors-demo">Custom Errors</button>
+      </div>
+      <div id="demo-output"></div>
+    </section>
+
+    <div class="info-box">
+      <h3>Step 5: Error Tracking Setup</h3>
+      <p><strong>Global Error Handler:</strong> Implemented (check console for errors)</p>
+      <p><strong>For TrackJS integration:</strong></p>
+      <ol>
+        <li>Sign up at trackjs.com</li>
+        <li>Get your token</li>
+        <li>Add the script (see below):</li>
+      </ol>
+      <pre style="background: #eee; padding: 8px; font-size: 12px;">
+&lt;script&gt;
+  window._trackJs = { token: 'YOUR_TOKEN_HERE' };
+&lt;/script&gt;
+&lt;script src="https://cdn.trackjs.com/agent/v3/latest/t.js"&gt;&lt;/script&gt;
+      </pre>
+    </div>
   </main>
 
-  <script>
-    let form = document.querySelector('form');
-    form.addEventListener('submit', e => {
-      e.preventDefault();
-      let output = document.querySelector('output');
-      let firstNum = document.querySelector('#first-num').value;
-      let secondNum = document.querySelector('#second-num').value;
-      let operator = document.querySelector('#operator').value;
-      output.innerHTML = eval(`${firstNum} ${operator} ${secondNum}`);
-    });
-
-    let errorBtns = Array.from(document.querySelectorAll('#error-btns > button'));
-
-    // Start your code here
-    // You may move this JS to another file if you wish
-  </script>
+  <script src="script.js"></script>
 </body>
 
 </html>
