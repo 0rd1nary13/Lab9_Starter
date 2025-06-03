@@ -1,5 +1,3 @@
-
-
 // Custom error classes (Step 4 requirement)
 class ValidationError extends Error {
   constructor(message) {
@@ -45,6 +43,15 @@ window.onerror = function(message, source, lineno, colno, error) {
   };
   
   console.log('Error data for tracking:', errorData);
+  
+  // Check if TrackJS is loaded
+  if (window.TrackJS) {
+    console.log('TrackJS is loaded - error should be sent automatically');
+    // TrackJS automatically captures window.onerror events
+  } else {
+    console.warn('TrackJS not loaded - error will not be tracked');
+  }
+  
   return true;
 };
 
@@ -255,8 +262,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
         case 'Trigger a Global Error':
           // This will trigger the global error handler
+          console.log('Triggering global error...');
+          
+          // Also manually send to TrackJS if available
+          if (window.TrackJS) {
+            console.log('Manually sending error to TrackJS...');
+            window.TrackJS.track('Manual test error from Lab 9');
+          }
+          
           setTimeout(() => {
-            throw new Error('Intentional error for testing global handler');
+            throw new Error('Intentional error for testing global handler and TrackJS');
           }, 100);
           break;
 
